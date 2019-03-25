@@ -1,2 +1,2 @@
 # SimpleNotes
-A simple Python=Flask-Angular application for managing notes
+A simple Python-Flask-Angular application for managing notes
