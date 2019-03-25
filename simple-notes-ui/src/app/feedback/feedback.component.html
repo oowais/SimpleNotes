@@ -1,5 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="space-evenly center">
 
+  <mat-toolbar>
+    <span>Feedback</span>
+  </mat-toolbar>
+
   <mat-form-field class="input" appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput placeholder="Your Name" [(ngModel)]="model.name">
@@ -16,6 +20,6 @@
       [(ngModel)]="model.feedback"></textarea>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" fxFlexAlign="center">Submit</button>
+  <button mat-raised-button color="primary" fxFlexAlign="center" (click)="submitFeedback()">Submit</button>
 
 </div>
