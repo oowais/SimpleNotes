@@ -18,14 +18,13 @@ export class FeedbackComponent implements OnInit {
   ngOnInit() {
   }
 
-  url: String = 'http://127.0.0.1:5002/';
+  url: string = 'http://127.0.0.1:5002/';
 
-  submitFeedback1(): void {
-    let url = "http://localhost:8080/api/feedback";
-    this.http.post(url, this.model).subscribe(
+  submitFeedback(): void {
+    this.http.post(this.url + 'feedback', this.model).subscribe(
       res => {
         alert("Feedback submitted");
-        location.reload();
+        // location.reload();
       },
       err => {
         alert("Error has occured!");
@@ -33,7 +32,7 @@ export class FeedbackComponent implements OnInit {
     );
   }
 
-  submitFeedback(): void {
+  submitFeedback2(): void {
     this.http.get(this.url + 'employees').subscribe(data => {
       let employeeData = data as JSON;
       console.log(employeeData);
@@ -43,7 +42,7 @@ export class FeedbackComponent implements OnInit {
 }
 
 export interface FeedbackViewModel {
-  name: String;
-  email: String;
-  feedback: String;
+  name: string;
+  email: string;
+  feedback: string;
 }
