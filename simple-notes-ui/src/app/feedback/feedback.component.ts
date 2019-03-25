@@ -18,7 +18,9 @@ export class FeedbackComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitFeedback(): void {
+  url: String = 'http://127.0.0.1:5002/';
+
+  submitFeedback1(): void {
     let url = "http://localhost:8080/api/feedback";
     this.http.post(url, this.model).subscribe(
       res => {
@@ -29,6 +31,13 @@ export class FeedbackComponent implements OnInit {
         alert("Error has occured!");
       }
     );
+  }
+
+  submitFeedback(): void {
+    this.http.get(this.url + 'employees').subscribe(data => {
+      let employeeData = data as JSON;
+      console.log(employeeData);
+    })
   }
 
 }
