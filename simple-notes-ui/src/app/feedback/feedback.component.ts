@@ -24,7 +24,7 @@ export class FeedbackComponent implements OnInit {
     this.http.post(this.url + 'feedback', this.model).subscribe(
       res => {
         alert("Feedback submitted");
-        // location.reload();
+        location.reload();
       },
       err => {
         alert("Error has occured!");
