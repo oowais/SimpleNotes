@@ -1,15 +1,19 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from data_structure.note import Note
+import logging
 
 
 class Db:
 
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
+
         self.__scope = ['https://spreadsheets.google.com/feeds',
                         'https://www.googleapis.com/auth/drive']
         self.__cred = ServiceAccountCredentials.from_json_keyfile_name(
             'Simple Notes DB-bd23117225f3.json', self.__scope)
+
         self.__client = gspread.authorize(self.__cred)
         self.__sheet = self.__client.open('Simple Notes DB').sheet1
 
@@ -33,16 +37,17 @@ class Db:
             index = 2
         else:
             index = len(records) + 2
-        print('index: ', index)
+        self.logger.info('Create note with id %d', index - 1)
         self.__sheet.insert_row([index - 1, note_text, last_edited], index)
 
     def update_note(self, id, note_text, last_edited):
         note_id = self.__get_note_id(id)
-        print(note_id)
         if note_id is not None and note_id == id:
+            self.logger.info('Update note %d', id)
             self.__sheet.update_cell(id + 1, 2, note_text)
             self.__sheet.update_cell(id + 1, 3, last_edited)
         else:
+            self.logger.warning('Note not found!')
             self.create_note(note_text, last_edited)
 
     def __get_note_id(self, id):
@@ -50,4 +55,4 @@ class Db:
         if len(row) == 0:
             return None
         else:
-            return row[0]
+            return int(row[0])
