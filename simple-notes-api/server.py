@@ -15,17 +15,33 @@ db = Db()
 
 
 @app.route("/")
-def hello():
-    return jsonify({'text': 'Hello World!'})
+def get_notes():
+    return db.get_all_notes()
+    # return jsonify({'text': 'Hello World!'})
 
 
-@app.route("/feedback", methods=['POST'])
+@app.route('/note/add', methods=['post'])
+def add_note():
+    pass
+
+
+@app.route('/note/update', methods=['post'])
+def update_note():
+    pass
+
+
+@app.route('/note/delete', methods=['post'])
+def delete_note():
+    pass
+
+
+@app.route('/feedback', methods=['POST'])
 def feedback():
     data = request.data.decode("utf-8")
-    dict = json.loads(data)
-    print("Name: {}".format(dict.get("name")))
-    print("Email: {}".format(dict.get("email")))
-    print("Feedback: {}".format(dict.get("feedback")))
+    data_dict = json.loads(data)
+    print("Name: {}".format(data_dict.get("name")))
+    print("Email: {}".format(data_dict.get("email")))
+    print("Feedback: {}".format(data_dict.get("feedback")))
     return ""
 
 

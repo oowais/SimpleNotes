@@ -7,8 +7,8 @@ if __name__ == '__main__':
 
     db = Db()
 
-    db.create_note("asf", "sdf")
-    db.update_note(7, "awf", "text")
+    db.delete_note(1)
+    db.update_note(3, "AAAA3", "A3")
     # db.get_note(2)
 
     notes = db.get_all_notes()
