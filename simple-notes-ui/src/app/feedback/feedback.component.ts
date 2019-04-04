@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-feedback',
@@ -13,7 +14,10 @@ export class FeedbackComponent implements OnInit {
     feedback: ''
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
   }
@@ -21,15 +25,29 @@ export class FeedbackComponent implements OnInit {
   url: string = 'http://127.0.0.1:5002/';
 
   submitFeedback(): void {
+    if (!this.validation())
+      return;
+
     this.http.post(this.url + 'feedback', this.model).subscribe(
       res => {
-        alert("Feedback submitted");
+        this.alert("Feedback submitted", false);
         location.reload();
       },
       err => {
-        alert("Error has occured!");
+        this.alert("Server error", true);
       }
     );
+  }
+  validation(): any {
+    if (this.model.email.trim() == '') {
+      this.alert("Please enter email address", true);
+      return false;
+    }
+    if (this.model.feedback.trim().length < 20) {
+      this.alert("Feedback must be atleast 20 characters", true);
+      return false;
+    }
+    return true;
   }
 
   submitFeedback2(): void {
@@ -39,6 +57,14 @@ export class FeedbackComponent implements OnInit {
     })
   }
 
+  alert(text: string, error: boolean): void {
+    let config = new MatSnackBarConfig();
+    config.verticalPosition = 'top';
+    config.horizontalPosition = 'center';
+    config.duration = 2000;
+    config.panelClass = error ? ['error-toast'] : undefined;
+    this.snackBar.open(text, 'Close', config);
+  }
 }
 
 export interface FeedbackViewModel {

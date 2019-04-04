@@ -11,7 +11,8 @@ import {
   MatIconModule,
   MatButtonModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
