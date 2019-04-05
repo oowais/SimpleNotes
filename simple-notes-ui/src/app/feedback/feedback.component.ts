@@ -42,12 +42,24 @@ export class FeedbackComponent implements OnInit {
     if (this.model.email.trim() == '') {
       this.alert("Please enter email address", true);
       return false;
+    } else if (!this.emailVerify(this.model.email)) {
+      this.alert("Please enter a valid email address", true);
+      return false;
     }
     if (this.model.feedback.trim().length < 20) {
-      this.alert("Feedback must be atleast 20 characters", true);
+      this.alert("Feedback is too small, (try with 20 characters)", true);
       return false;
     }
     return true;
+  }
+
+  emailVerify(email: string): boolean {
+    let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    let emailRes = regexp.exec(email);
+    if (emailRes == null)
+      return false;
+    else if (emailRes.length > 0)
+      return true;
   }
 
   submitFeedback2(): void {
