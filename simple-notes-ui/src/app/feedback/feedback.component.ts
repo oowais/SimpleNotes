@@ -9,7 +9,7 @@ import { FeedbackViewModel } from '../model/feedback';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
-  model: FeedbackViewModel = {
+  feedback: FeedbackViewModel = {
     name: '',
     email: '',
     feedback: ''
@@ -34,7 +34,7 @@ export class FeedbackComponent implements OnInit {
     if (!this.validation())
       return;
 
-    this.http.post(this.url + 'feedback', this.model).subscribe(
+    this.http.post(this.url + 'feedback', this.feedback).subscribe(
       res => {
         this.alert("Feedback submitted", false);
         location.reload();
@@ -52,14 +52,14 @@ export class FeedbackComponent implements OnInit {
    * @returns boolean
    */
   validation(): boolean {
-    if (this.model.email.trim() == '') {
+    if (this.feedback.email.trim() == '') {
       this.alert("Please enter email address", true);
       return false;
-    } else if (!this.emailVerify(this.model.email)) {
+    } else if (!this.emailVerify(this.feedback.email)) {
       this.alert("Please enter a valid email address", true);
       return false;
     }
-    if (this.model.feedback.trim().length < 20) {
+    if (this.feedback.feedback.trim().length < 20) {
       this.alert("Feedback is too small, (try with 20 characters)", true);
       return false;
     }

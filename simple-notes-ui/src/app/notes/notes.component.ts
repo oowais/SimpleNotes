@@ -24,10 +24,7 @@ export class NotesComponent implements OnInit {
    */
   public getAllNotes(): void {
     this.http.get<Note[]>(this.url + 'notes').subscribe(data => {
-      // let employeeData = data as JSON;
-      console.log(data);
       this.notes = data;
-
     })
   }
 

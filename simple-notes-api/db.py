@@ -24,10 +24,11 @@ class Db:
             return None
         notes = []
         for d in records:
-            notes.append({'id': d.get('id'), 'note_text': d.get('note_text'), 'last_edited': d.get('last_edited')})
+            notes.append({'id': d.get('id'), 'heading': d.get('heading'), 'note_text': d.get('note_text'),
+                          'last_edited': d.get('last_edited')})
         return notes
 
-    def create_note(self, note_text, last_edited):
+    def create_note(self, heading, note_text, last_edited):
         try:
             records = self.__sheet.get_all_records()
         except IndexError:
@@ -42,17 +43,18 @@ class Db:
             index = total_rows + 1
             curr_id = last_id + 1
         self.logger.info('Create note with id %d', curr_id)
-        self.__sheet.insert_row([curr_id, note_text, last_edited], index)
+        self.__sheet.insert_row([curr_id, heading, note_text, last_edited], index)
 
-    def update_note(self, id, note_text, last_edited):
+    def update_note(self, id, heading, note_text, last_edited):
         note_row = self.__get_note_row(id)
         if note_row is not None:
             self.logger.info('Update note %d', id)
-            self.__sheet.update_cell(note_row, 2, note_text)
-            self.__sheet.update_cell(note_row, 3, last_edited)
+            self.__sheet.update_cell(note_row, 2, heading)
+            self.__sheet.update_cell(note_row, 3, note_text)
+            self.__sheet.update_cell(note_row, 4, last_edited)
         else:
             self.logger.warning('Note %d not found!', id)
-            self.create_note(note_text, last_edited)
+            self.create_note(heading, note_text, last_edited)
 
     def delete_note(self, id):
         note_row = self.__get_note_row(id)
