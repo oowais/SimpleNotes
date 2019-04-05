@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { FeedbackViewModel } from '../model/feedback';
 
 @Component({
   selector: 'app-feedback',
@@ -14,6 +15,8 @@ export class FeedbackComponent implements OnInit {
     feedback: ''
   };
 
+  url: string = 'http://127.0.0.1:5002/';
+
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar
@@ -22,8 +25,11 @@ export class FeedbackComponent implements OnInit {
   ngOnInit() {
   }
 
-  url: string = 'http://127.0.0.1:5002/';
-
+  /**
+   * @ngdoc function
+   * @name submitFeedback
+   * @description sends post call to server with feedback data
+   */
   submitFeedback(): void {
     if (!this.validation())
       return;
@@ -38,7 +44,14 @@ export class FeedbackComponent implements OnInit {
       }
     );
   }
-  validation(): any {
+
+  /**
+   * @ngdoc function
+   * @name validation
+   * @description Validates if content in feedback is proper or not
+   * @returns boolean
+   */
+  validation(): boolean {
     if (this.model.email.trim() == '') {
       this.alert("Please enter email address", true);
       return false;
@@ -53,6 +66,13 @@ export class FeedbackComponent implements OnInit {
     return true;
   }
 
+  /**
+   * @ngdoc function
+   * @name emailVerify
+   * @description Verifies email against regex
+   * @param email
+   * @returns boolean
+   */
   emailVerify(email: string): boolean {
     let regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     let emailRes = regexp.exec(email);
@@ -62,13 +82,13 @@ export class FeedbackComponent implements OnInit {
       return true;
   }
 
-  submitFeedback2(): void {
-    this.http.get(this.url + 'employees').subscribe(data => {
-      let employeeData = data as JSON;
-      console.log(employeeData);
-    })
-  }
-
+  /**
+   * @ngdoc function
+   * @name alert
+   * @description Snack bar alert message
+   * @param text
+   * @param error
+   */
   alert(text: string, error: boolean): void {
     let config = new MatSnackBarConfig();
     config.verticalPosition = 'top';
@@ -77,10 +97,4 @@ export class FeedbackComponent implements OnInit {
     config.panelClass = error ? ['error-toast'] : undefined;
     this.snackBar.open(text, 'Close', config);
   }
-}
-
-export interface FeedbackViewModel {
-  name: string;
-  email: string;
-  feedback: string;
 }

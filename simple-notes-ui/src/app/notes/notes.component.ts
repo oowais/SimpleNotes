@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Note } from '../model/note';
 
 @Component({
   selector: 'app-notes',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+  notes: Note[] = [];
+  url: string = 'http://127.0.0.1:5002/';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.getAllNotes();
+  }
+
+  /**
+   * @ngdoc function
+   * @name getAllNotes
+   * @description Get method to fetch all notes from server
+   */
+  public getAllNotes(): void {
+    this.http.get(this.url + 'notes').subscribe(data => {
+      // let employeeData = data as JSON;
+      console.log(data);
+    })
   }
 
 }

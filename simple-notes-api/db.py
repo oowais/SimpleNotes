@@ -24,9 +24,9 @@ class Db:
             return None
         notes = []
         for d in records:
-            note = Note(d.get('id'), d.get('note_text'), d.get('last_edited'))
-            notes.append(note)
-        return notes
+            notes.append({'id': d.get('id'), 'note_text': d.get('note_text'), 'last_edited': d.get('last_edited')})
+        notes_obj = {'notes': notes}
+        return notes_obj
 
     def create_note(self, note_text, last_edited):
         try:

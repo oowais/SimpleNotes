@@ -14,23 +14,22 @@ CORS(app)
 db = Db()
 
 
-@app.route("/")
+@app.route("/notes", methods=['GET'])
 def get_notes():
-    return db.get_all_notes()
-    # return jsonify({'text': 'Hello World!'})
+    return jsonify(db.get_all_notes())
 
 
-@app.route('/note/add', methods=['post'])
+@app.route('/notes/add', methods=['POST'])
 def add_note():
     pass
 
 
-@app.route('/note/update', methods=['post'])
+@app.route('/notes/update', methods=['POST'])
 def update_note():
     pass
 
 
-@app.route('/note/delete', methods=['post'])
+@app.route('/notes/delete', methods=['POST'])
 def delete_note():
     pass
 
