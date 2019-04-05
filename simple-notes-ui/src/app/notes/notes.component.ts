@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Note } from '../model/note';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,9 +9,8 @@ import { Note } from '../model/note';
 })
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
-  url: string = 'http://127.0.0.1:5002/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private service: SharedService) { }
 
   ngOnInit() {
     this.getAllNotes();
@@ -23,9 +22,10 @@ export class NotesComponent implements OnInit {
    * @description Get method to fetch all notes from server
    */
   public getAllNotes(): void {
-    this.http.get<Note[]>(this.url + 'notes').subscribe(data => {
-      this.notes = data;
-    })
+    this.service.getAllNotes().subscribe(
+      data => {
+        this.notes = data;
+      });
   }
 
 }

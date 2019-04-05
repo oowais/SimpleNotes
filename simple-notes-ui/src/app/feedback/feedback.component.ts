@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { FeedbackViewModel } from '../model/feedback';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-feedback',
@@ -9,7 +8,7 @@ import { FeedbackViewModel } from '../model/feedback';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
-  feedback: FeedbackViewModel = {
+  model: FeedbackViewModel = {
     name: '',
     email: '',
     feedback: ''
@@ -17,10 +16,7 @@ export class FeedbackComponent implements OnInit {
 
   url: string = 'http://127.0.0.1:5002/';
 
-  constructor(
-    private http: HttpClient,
-    private snackBar: MatSnackBar
-  ) { }
+  constructor(private service: SharedService) { }
 
   ngOnInit() {
   }
@@ -34,13 +30,13 @@ export class FeedbackComponent implements OnInit {
     if (!this.validation())
       return;
 
-    this.http.post(this.url + 'feedback', this.feedback).subscribe(
+    this.service.submitFeedback(this.model).subscribe(
       res => {
-        this.alert("Feedback submitted", false);
         location.reload();
+        this.service.alert("Feedback submitted", false);
       },
       err => {
-        this.alert("Server error", true);
+        this.service.alert("Server error", true);
       }
     );
   }
@@ -52,15 +48,15 @@ export class FeedbackComponent implements OnInit {
    * @returns boolean
    */
   validation(): boolean {
-    if (this.feedback.email.trim() == '') {
-      this.alert("Please enter email address", true);
+    if (this.model.email.trim() == '') {
+      this.service.alert("Please enter email address", true);
       return false;
-    } else if (!this.emailVerify(this.feedback.email)) {
-      this.alert("Please enter a valid email address", true);
+    } else if (!this.emailVerify(this.model.email)) {
+      this.service.alert("Please enter a valid email address", true);
       return false;
     }
-    if (this.feedback.feedback.trim().length < 20) {
-      this.alert("Feedback is too small, (try with 20 characters)", true);
+    if (this.model.feedback.trim().length < 20) {
+      this.service.alert("Feedback is too small, (try with 20 characters)", true);
       return false;
     }
     return true;
@@ -82,19 +78,4 @@ export class FeedbackComponent implements OnInit {
       return true;
   }
 
-  /**
-   * @ngdoc function
-   * @name alert
-   * @description Snack bar alert message
-   * @param text
-   * @param error
-   */
-  alert(text: string, error: boolean): void {
-    let config = new MatSnackBarConfig();
-    config.verticalPosition = 'top';
-    config.horizontalPosition = 'center';
-    config.duration = 2000;
-    config.panelClass = error ? ['error-toast'] : undefined;
-    this.snackBar.open(text, 'Close', config);
-  }
 }

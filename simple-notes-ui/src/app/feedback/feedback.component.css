@@ -3,8 +3,3 @@
     width: calc(100vw - 2em);
     max-width: 400px;
 }
-
-::ng-deep .error-toast{
-    color: #ffffff !important;
-    background-color: #cc3333 !important;
-}
