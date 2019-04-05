@@ -1,5 +1,5 @@
 export interface Note {
     id: number;
-    noteText: string;
-    lastEdited: string;
+    note_text: string;
+    last_edited: string | Date;
 }

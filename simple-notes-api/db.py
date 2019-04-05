@@ -25,8 +25,7 @@ class Db:
         notes = []
         for d in records:
             notes.append({'id': d.get('id'), 'note_text': d.get('note_text'), 'last_edited': d.get('last_edited')})
-        notes_obj = {'notes': notes}
-        return notes_obj
+        return notes
 
     def create_note(self, note_text, last_edited):
         try:

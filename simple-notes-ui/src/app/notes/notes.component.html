@@ -1,3 +1,15 @@
-<p>
-  notes works!
-</p>
+<div class="col s10 offset-s1 m6 l4" *ngFor="let n of notes">
+  <div class="card">
+    <div class="card-content">
+      <div class="icon-block">
+        <div class="card-title">
+          <!-- give the card-title class to your titles -->
+          <mat-card-title>{{n.id}}</mat-card-title>
+          <mat-card-subtitle>{{n.note_text}}</mat-card-subtitle>
+          <!-- <p class="card-subtitle">{{n.last_edited}}</p> -->
+        </div>
+        <p class="light">{{n.last_edited}}</p>
+      </div>
+    </div>
+  </div>
+</div>
