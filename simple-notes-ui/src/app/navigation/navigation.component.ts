@@ -26,7 +26,7 @@ export class NavigationComponent implements OnInit {
   }
 
   newNote() {
-    //TODO: New note
+    //TODO: New note component-- make it!
   }
 
   onSearchChange(searchValue: string) {
