@@ -25,7 +25,7 @@ Follow the procedure to add your own DB file in the root of simple-notes-api
   - Click `Contuinue`
 - Now json file be downloaded
 - Save this file in root of simple-notes-api
-- ###### Keep this json file private!
+- **Keep this json file private!**
 - Rename it to `Simple-Notes-DB.json` (I added it in .gitignore) so you don't upload this to the github by chance
 - Go back to [Developers Google ](https://console.developers.google.com/) and enable `Google Sheets Api` for the same project
 - Now open `Simple-Notes-DP.json`
@@ -36,6 +36,7 @@ Follow the procedure to add your own DB file in the root of simple-notes-api
   - Cell B1: `heading`
   - Cell C1: `note_text`
   - Cell D1: `last_edited`
+  ![Like this](assets/DB-Sheets-heading.png)
 - Click on `Share` button on top-right, and paste that `client_email` from the json file
 - Now you should be able to use server.py to access data from Google sheets
 - [Reference Video- Google Sheets and Python by Twilio](https://www.youtube.com/watch?v=vISRn5qFrkM)
