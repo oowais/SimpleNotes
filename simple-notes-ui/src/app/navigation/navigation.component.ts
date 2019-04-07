@@ -31,12 +31,7 @@ export class NavigationComponent implements OnInit {
 
   onSearchChange(searchValue: string) {
     console.log(searchValue);
-    //TODO: send call to backend to search for auto complete and fill the options array
-  }
-
-  selectedOption(searchValue: string) {
-    console.log(searchValue);
-    //TODO open the note with this content
+    //TODO: send call to backend to search and show notes who has similar content in notes component
   }
 
 }

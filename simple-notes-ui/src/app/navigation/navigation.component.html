@@ -12,16 +12,12 @@
   <mat-toolbar-row *ngIf="showSearchBar">
     <mat-form-field class="search-bar">
       <mat-icon *ngIf="!searchValue">search</mat-icon>
-      <input type="text" matInput [matAutocomplete]="searchAuto" [(ngModel)]="searchValue"
+      <input type="text" matInput [(ngModel)]="searchValue"
         (input)="onSearchChange($event.target.value)">
     </mat-form-field>
 
-    <mat-autocomplete #searchAuto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option" (click)="selectedOption(option)">{{option}}</mat-option>
-    </mat-autocomplete>
-
-    <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-      <mat-icon>close</mat-icon>
+    <button mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
+      <mat-icon>clear</mat-icon>
     </button>
 
     <button class="new-note-button" color="accent" mat-raised-button (click)="newNote()">
