@@ -9,6 +9,8 @@ import { DataService } from '../shared/data.service';
 export class NavigationComponent implements OnInit {
 
   showSearchBar: boolean;
+  options = ["test", "test2", "twest3"];
+  searchValue: string;
 
   constructor(
     private dataService: DataService
@@ -21,6 +23,20 @@ export class NavigationComponent implements OnInit {
   startReceivingEvents() {
     this.dataService.currentPage.subscribe(page => page.includes('notes') ? this.showSearchBar = true : this.showSearchBar = false
     );
+  }
+
+  newNote() {
+    //TODO: New note
+  }
+
+  onSearchChange(searchValue: string) {
+    console.log(searchValue);
+    //TODO: send call to backend to search for auto complete and fill the options array
+  }
+
+  selectedOption(searchValue: string) {
+    console.log(searchValue);
+    //TODO open the note with this content
   }
 
 }

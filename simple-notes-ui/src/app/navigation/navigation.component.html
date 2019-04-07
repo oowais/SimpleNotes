@@ -1,11 +1,31 @@
 <mat-toolbar color="primary" class="toolbar">
-  <mat-toolbar-row>
-    <button class="buttons" routerLink="/notes" mat-raised-button>
-      <mat-icon>home</mat-icon> Simple Notes
+  <mat-toolbar-row class="mat-elevation-z8">
+    <button class="home-button" routerLink="/notes" mat-button>
+      <mat-icon>speaker_notes</mat-icon>Simple Notes
     </button>
-    <!-- <span class="spacer"></span> -->
-    <button class="buttons" routerLink="/feedback" mat-stroked-button>Feedback</button>
+    <span class="spacer"></span>
+    <button class="feedback-button" routerLink="/feedback" mat-button>
+      <mat-icon>feedback</mat-icon>Feedback
+    </button>
   </mat-toolbar-row>
+
   <mat-toolbar-row *ngIf="showSearchBar">
+    <mat-form-field class="search-bar">
+      <mat-icon *ngIf="!searchValue">search</mat-icon>
+      <input type="text" matInput [matAutocomplete]="searchAuto" [(ngModel)]="searchValue"
+        (input)="onSearchChange($event.target.value)">
+    </mat-form-field>
+
+    <mat-autocomplete #searchAuto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option" (click)="selectedOption(option)">{{option}}</mat-option>
+    </mat-autocomplete>
+
+    <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button class="new-note-button" color="accent" mat-raised-button (click)="newNote()">
+      <mat-icon>add</mat-icon> New Note
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>

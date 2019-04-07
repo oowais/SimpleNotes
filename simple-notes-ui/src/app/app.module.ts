@@ -13,7 +13,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
