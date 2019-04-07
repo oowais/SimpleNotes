@@ -4,7 +4,7 @@ import pprint
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('Simple Notes DB-bd23117225f3.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('Simple-Notes-DB.json', scope)
 client = gspread.authorize(creds)
 
 sheet = client.open('Simple Notes DB').sheet1

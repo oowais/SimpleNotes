@@ -1,4 +1,9 @@
-::ng-deep .error-toast{
+::ng-deep .error-toast {
     color: #ffffff !important;
     background-color: #cc3333 !important;
+}
+
+.container {
+    margin: auto;
+    max-width: 1200px;
 }

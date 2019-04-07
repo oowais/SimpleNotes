@@ -1,6 +1,5 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from data_structure.note import Note
 import logging
 
 
@@ -12,7 +11,7 @@ class Db:
         self.__scope = ['https://spreadsheets.google.com/feeds',
                         'https://www.googleapis.com/auth/drive']
         self.__cred = ServiceAccountCredentials.from_json_keyfile_name(
-            'Simple Notes DB-bd23117225f3.json', self.__scope)
+            'Simple-Notes-DB.json', self.__scope)
 
         self.__client = gspread.authorize(self.__cred)
         self.__sheet = self.__client.open('Simple Notes DB').sheet1
