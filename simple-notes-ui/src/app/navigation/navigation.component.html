@@ -1,7 +1,11 @@
 <mat-toolbar color="primary" class="toolbar">
   <mat-toolbar-row>
-    <button class="buttons" routerLink="/notes" mat-raised-button><mat-icon>home</mat-icon> Simple Notes</button>
+    <button class="buttons" routerLink="/notes" mat-raised-button>
+      <mat-icon>home</mat-icon> Simple Notes
+    </button>
     <!-- <span class="spacer"></span> -->
     <button class="buttons" routerLink="/feedback" mat-stroked-button>Feedback</button>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="showSearchBar">
   </mat-toolbar-row>
 </mat-toolbar>

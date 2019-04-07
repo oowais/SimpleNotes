@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackViewModel } from '../model/feedback';
 import { SharedService } from '../shared/shared.service';
+import { DataService } from '../shared/data.service';
 
 @Component({
   selector: 'app-feedback',
@@ -16,9 +17,13 @@ export class FeedbackComponent implements OnInit {
 
   url: string = 'http://127.0.0.1:5002/';
 
-  constructor(private service: SharedService) { }
+  constructor(
+    private service: SharedService,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.dataService.changePage(location.pathname);
   }
 
   /**

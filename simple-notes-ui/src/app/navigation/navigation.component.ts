@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../shared/data.service';
 
 @Component({
   selector: 'app-navigation',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  showSearchBar: boolean;
+
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.startReceivingEvents();
+  }
+
+  startReceivingEvents() {
+    this.dataService.currentPage.subscribe(page => page.includes('notes') ? this.showSearchBar = true : this.showSearchBar = false
+    );
   }
 
 }

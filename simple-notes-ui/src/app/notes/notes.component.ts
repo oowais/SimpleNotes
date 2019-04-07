@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../model/note';
 import { SharedService } from '../shared/shared.service';
+import { DataService } from '../shared/data.service';
 
 @Component({
   selector: 'app-notes',
@@ -10,9 +11,13 @@ import { SharedService } from '../shared/shared.service';
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
 
-  constructor(private service: SharedService) { }
+  constructor(
+    private service: SharedService,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.dataService.changePage(location.pathname);
     this.getAllNotes();
   }
 

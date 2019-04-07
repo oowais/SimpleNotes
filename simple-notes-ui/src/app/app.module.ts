@@ -21,6 +21,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NotesComponent } from './notes/notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DataService } from './shared/data.service';
 
 const appRoutes: Routes = [
   {
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
