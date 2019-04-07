@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/data.service';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-navigation',
@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit {
   searchValue: string;
 
   constructor(
-    private dataService: DataService
+    private service: SharedService
   ) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
   }
 
   startReceivingEvents() {
-    this.dataService.currentPage.subscribe(page => page.includes('notes') ? this.showSearchBar = true : this.showSearchBar = false
+    this.service.currentPage.subscribe(page => page.includes('feedback') ? this.showSearchBar = false : this.showSearchBar = true
     );
   }
 
@@ -30,8 +30,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onSearchChange(searchValue: string) {
-    console.log(searchValue);
-    //TODO: send call to backend to search and show notes who has similar content in notes component
+    this.service.changeSearchValue(searchValue);
   }
 
 }

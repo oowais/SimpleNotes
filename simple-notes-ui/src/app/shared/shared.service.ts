@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { Note } from '../model/note';
 import { FeedbackViewModel } from '../model/feedback';
@@ -16,6 +16,12 @@ export class SharedService {
 
     private FEEDBACK_URL: string = this.BASE_URL + 'feedback';
     private GET_NOTES_URL: string = this.BASE_URL + 'notes';
+
+    private searchValue = new BehaviorSubject<string>("");
+    private page = new BehaviorSubject<string>("");
+
+    currentSearchValue = this.searchValue.asObservable();
+    currentPage = this.page.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -57,5 +63,25 @@ export class SharedService {
         config.duration = 2000;
         config.panelClass = error ? ['error-toast'] : undefined;
         this.snackBar.open(text, 'Close', config);
+    }
+
+    /**
+   * @ngdoc function
+   * @name changePage
+   * @description Send event that page has changed
+   * @param pageName
+   */
+    changePage(pageName: string) {
+        this.page.next(pageName);
+    }
+
+    /**
+   * @ngdoc function
+   * @name changeSearchValue
+   * @description Send event that search value has changed
+   * @param search
+   */
+    changeSearchValue(search: string) {
+        this.searchValue.next(search);
     }
 }
