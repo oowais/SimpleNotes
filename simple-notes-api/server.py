@@ -16,7 +16,11 @@ db = Db()
 
 @app.route("/notes", methods=['GET'])
 def get_notes():
-    return jsonify(db.get_all_notes())
+    search = request.args.get('search', default=None, type=str)
+    if search is not None:
+        return jsonify(db.get_filtered_notes(search))
+    else:
+        return jsonify(db.get_all_notes())
 
 
 @app.route('/notes/add', methods=['POST'])

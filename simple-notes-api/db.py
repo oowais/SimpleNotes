@@ -27,6 +27,18 @@ class Db:
                           'last_edited': d.get('last_edited')})
         return notes
 
+    def get_filtered_notes(self, search_value):
+        try:
+            records = self.__sheet.get_all_records()
+        except IndexError:
+            return None
+        notes = []
+        for d in records:
+            if search_value.lower() in d.get('heading').lower() or search_value.lower() in d.get('note_text').lower():
+                notes.append({'id': d.get('id'), 'heading': d.get('heading'), 'note_text': d.get('note_text'),
+                              'last_edited': d.get('last_edited')})
+        return notes
+
     def create_note(self, heading, note_text, last_edited):
         try:
             records = self.__sheet.get_all_records()

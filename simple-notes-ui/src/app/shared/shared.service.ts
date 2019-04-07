@@ -38,6 +38,17 @@ export class SharedService {
         return this.http.get<Note[]>(this.GET_NOTES_URL);
     }
 
+
+    /**
+   * @ngdoc function
+   * @name getFilteredNotes
+   * @description Get call to get filtered notes from server
+   * @returns Observable<Note[]>
+   */
+    getFilteredNotes(searchVal): Observable<Note[]> {
+        return this.http.get<Note[]>(this.GET_NOTES_URL + '?search=' + searchVal);
+    }
+
     /**
    * @ngdoc function
    * @name submitFeedback

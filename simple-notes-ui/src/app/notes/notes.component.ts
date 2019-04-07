@@ -17,18 +17,23 @@ export class NotesComponent implements OnInit {
   ngOnInit() {
     this.service.changePage(location.pathname);
     this.getAllNotes();
-    this.startFilterNotesService();
+    this.filterNotes();
   }
 
   /**
    * @ngdoc function
-   * @name startFilterNotesService
+   * @name filterNotes
    * @description Get method to fetch notes according to filter
    */
-  startFilterNotesService() {
+  filterNotes() {
     this.service.currentSearchValue.subscribe(val => {
-      console.log(val);
-      //TODO: send call to backend to search and show notes who has similar content in notes component
+      if ("" != val)
+        this.service.getFilteredNotes(val).subscribe(
+          data => {
+            this.notes = data;
+          }
+        );
+      else this.getAllNotes();
     });
   }
 

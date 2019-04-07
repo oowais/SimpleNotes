@@ -16,7 +16,7 @@
         (input)="onSearchChange($event.target.value)">
     </mat-form-field>
 
-    <button mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
+    <button mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''" (click)="onSearchChange('')">
       <mat-icon>clear</mat-icon>
     </button>
 
