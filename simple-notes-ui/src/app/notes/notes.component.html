@@ -1,6 +1,6 @@
-<mat-card class="note-card col s10 offset-s1 m6 l4" *ngFor="let n of notes">
+<div class="note-card-container">
+<mat-card class="note-card" *ngFor="let n of notes">
   <mat-card-header>
-    <!-- <mat-card-title>{{n.id}}. {{n.heading}}</mat-card-title> -->
     <mat-card-title>{{n.heading}}</mat-card-title>
     <mat-card-subtitle>Edited {{n.last_edited}}</mat-card-subtitle>
   </mat-card-header>
@@ -8,3 +8,4 @@
     <mat-card-subtitle>{{n.note_text}}</mat-card-subtitle>
   </mat-card-content>
 </mat-card>
+</div>
