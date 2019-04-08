@@ -3,6 +3,7 @@
     position: -webkit-sticky;
     top: 0;
     z-index: 1000;
+    max-width: 1200px;
 }
 
 .feedback-button, .home-button {
@@ -11,13 +12,4 @@
 
 .spacer {
     flex: 1 1 auto;
-}
-
-.search-bar {
-    flex: 1 1 auto;
-}
-
-.new-note-button {
-    margin: 0em 0em 0em 1em;
-    padding: 2px 12px 2px 4px;
 }

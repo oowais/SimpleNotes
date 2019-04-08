@@ -22,6 +22,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { NotesComponent } from './notes/notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedService } from './shared/shared.service';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes: Routes = [
   {
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     FeedbackComponent,
     NotesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
