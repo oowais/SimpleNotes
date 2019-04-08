@@ -1,0 +1,20 @@
+.note-card {
+    width: 600px;
+}
+
+.input-title, .input-text {
+    width: 100%;
+}
+
+.input-text-area{
+    overflow-y: hidden;
+}
+
+/* Not using this; kept for lookup */
+.note-card-xs {
+    width: 200px;
+}
+
+.note-card-sm {
+    width: 430px;
+}

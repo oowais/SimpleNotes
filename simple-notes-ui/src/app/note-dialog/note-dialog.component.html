@@ -1,1 +1,20 @@
-TODO: Make this component!
+<div class="note-card" ngClass.xs="note-card-sm" ngClass.sm="note-card-sm">
+    <div mat-dialog-title>
+        <mat-form-field class="input-title">
+            <textarea matInput placeholder="Title" [matTextareaAutosize]="true" value="{{heading}}"
+                [(ngModel)]="heading" maxlength="100" #title></textarea>
+            <mat-hint align="end">{{title.value.length}}/100</mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+        <mat-form-field class="input-text">
+            <textarea class="input-text-area" matInput placeholder="Leave a comment" [matTextareaAutosize]="true" [(ngModel)]="noteText"
+                maxlength="5000" #text></textarea>
+            <mat-hint align="end">{{text.value.length}}/5000</mat-hint>
+        </mat-form-field>
+    </div>
+    <div align='end' mat-dialog-actions>
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button color="primary" (click)="test()">Save</button>
+    </div>
+</div>
