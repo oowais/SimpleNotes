@@ -13,7 +13,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { NotesComponent } from './notes/notes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedService } from './shared/shared.service';
 import { SearchComponent } from './search/search.component';
+import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
     FeedbackComponent,
     NotesComponent,
     NotFoundComponent,
-    SearchComponent
+    SearchComponent,
+    NoteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +69,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [SharedService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NoteDialogComponent]
 })
 export class AppModule { }

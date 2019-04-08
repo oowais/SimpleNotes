@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared/shared.service';
+import { MatDialog } from '@angular/material';
+import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +14,8 @@ export class SearchComponent implements OnInit {
   searchValue: string;
 
   constructor(
-    private service: SharedService
+    private service: SharedService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -25,6 +28,11 @@ export class SearchComponent implements OnInit {
   }
 
   newNote() {
+    const dialogRef = this.dialog.open(NoteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
     //TODO: New note component-- make it!
   }
   
