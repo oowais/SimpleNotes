@@ -1,3 +1,4 @@
+/* TODO When the screen size is biggest show four cards in a row*/
 .note-card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
