@@ -49,4 +49,20 @@ export class NotesComponent implements OnInit {
       });
   }
 
+  delete(id: number): void {
+    this.service.deleteById(id).subscribe(
+      msg => {
+        if (true == msg.success){
+          this.service.alert('Note deleted!', false);
+          this.getAllNotes();
+        }
+        else
+          this.service.alert(msg, true);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
 }

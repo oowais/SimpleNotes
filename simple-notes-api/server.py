@@ -35,7 +35,12 @@ def update_note():
 
 @app.route('/notes/delete', methods=['POST'])
 def delete_note():
-    pass
+    note_id = request.data.decode("utf-8")
+    result = db.delete_note(int(note_id))
+    if result is True:
+        return jsonify(success=True)
+    else:
+        return jsonify("Note not found in database!", success=False)
 
 
 @app.route('/feedback', methods=['POST'])
@@ -45,7 +50,9 @@ def feedback():
     print("Name: {}".format(data_dict.get("name")))
     print("Email: {}".format(data_dict.get("email")))
     print("Feedback: {}".format(data_dict.get("feedback")))
-    return ""
+    return jsonify(success=True)
+    # if failed: send this
+    # return jsonify("some error", success=False)
 
 
 class Employees(Resource):

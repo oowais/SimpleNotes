@@ -12,10 +12,12 @@ import { FeedbackViewModel } from '../model/feedback';
     providedIn: 'root'
 })
 export class SharedService {
+
     private BASE_URL: string = 'http://127.0.0.1:5002/';
 
     private FEEDBACK_URL: string = this.BASE_URL + 'feedback';
     private GET_NOTES_URL: string = this.BASE_URL + 'notes';
+    private DELETE_BY_ID_URL: string = this.BASE_URL + 'notes/delete';
 
     private searchValue = new BehaviorSubject<string>("");
     private page = new BehaviorSubject<string>("");
@@ -94,5 +96,9 @@ export class SharedService {
    */
     changeSearchValue(search: string) {
         this.searchValue.next(search);
+    }
+
+    deleteById(id: number): Observable<any> {
+        return this.http.post(this.DELETE_BY_ID_URL, id);
     }
 }

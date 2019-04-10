@@ -1,4 +1,4 @@
-<div class="note-card" ngClass.xs="note-card-sm" ngClass.sm="note-card-sm">
+<div class="note-card" ngClass.sm="note-card-sm" ngClass.lt-sm="note-card-lt-sm">
     <div mat-dialog-title>
         <mat-form-field class="input-title">
             <textarea matInput placeholder="Title" [matTextareaAutosize]="true" value="{{heading}}"
@@ -8,8 +8,8 @@
     </div>
     <div mat-dialog-content>
         <mat-form-field class="input-text">
-            <textarea class="input-text-area" matInput placeholder="Leave a comment" [matTextareaAutosize]="true" [(ngModel)]="noteText"
-                maxlength="5000" #text></textarea>
+            <textarea class="input-text-area" matInput placeholder="Leave a comment" [matTextareaAutosize]="true"
+                [(ngModel)]="noteText" maxlength="5000" #text></textarea>
             <mat-hint align="end">{{text.value.length}}/5000</mat-hint>
         </mat-form-field>
     </div>

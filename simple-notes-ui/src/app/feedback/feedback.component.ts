@@ -35,11 +35,15 @@ export class FeedbackComponent implements OnInit {
 
     this.service.submitFeedback(this.model).subscribe(
       res => {
-        location.reload();
-        this.service.alert("Feedback submitted", false);
+        if (true == res.success) {
+          alert("Feedback submitted");
+          location.reload();
+        }
+        else
+          this.service.alert("Unexplainable error occured!", true);
       },
       err => {
-        this.service.alert("Server error", true);
+        this.service.alert("Server error!", true);
       }
     );
   }

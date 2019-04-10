@@ -71,10 +71,11 @@ class Db:
         note_row = self.__get_note_row(id)
         if note_row is None:
             self.logger.warning('Note %d not found! Cannot delete', id)
-            return None
+            return False
         else:
-            self.logger.warning('Note %d deleted', id)
             self.__sheet.delete_row(note_row)
+            self.logger.warning('Note %d deleted', id)
+            return True
 
     def __get_note_row(self, id):
         records = self.__sheet.get_all_records()
