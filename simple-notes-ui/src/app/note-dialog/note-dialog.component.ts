@@ -16,7 +16,8 @@ export class NoteDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  test(){
+  Save(){
+    // TODO: complete this. most important for this repo.
     console.log(this.heading);
   }
 }
