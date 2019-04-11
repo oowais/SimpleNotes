@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from flask import Flask, request
 from flask_cors import CORS
@@ -25,7 +26,12 @@ def get_notes():
 
 @app.route('/notes/add', methods=['POST'])
 def add_note():
-    pass
+    data = request.data.decode("utf-8")
+    data_dict = json.loads(data)
+    now = datetime.datetime.now()
+    date = now.strftime("%d-%m-%Y %H:%M")
+    db.create_note(heading=data_dict.get("heading"), note_text=data_dict.get("text"), last_edited=date)
+    return jsonify(success=True)
 
 
 @app.route('/notes/update', methods=['POST'])

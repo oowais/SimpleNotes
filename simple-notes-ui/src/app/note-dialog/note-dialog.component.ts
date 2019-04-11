@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'note-dialog',
@@ -11,13 +12,20 @@ export class NoteDialogComponent implements OnInit {
   noteText: string;
   lastEdited: string;
 
-  constructor() { }
+  constructor(private service: SharedService) { }
 
   ngOnInit() {
   }
 
-  Save(){
-    // TODO: complete this. most important for this repo.
-    console.log(this.heading);
+  Save(title: string, text: string) {
+    this.service.addNote(title, text).subscribe(
+      res => {
+        if (res.success == true) {
+          this.service.alert('Note saved', false);
+          // TODO: dont use location reload, instead refresh the notes component
+          location.reload();
+        }
+      }
+    )
   }
 }

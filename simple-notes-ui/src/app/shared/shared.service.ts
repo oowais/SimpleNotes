@@ -17,6 +17,7 @@ export class SharedService {
 
     private FEEDBACK_URL: string = this.BASE_URL + 'feedback';
     private GET_NOTES_URL: string = this.BASE_URL + 'notes';
+    private ADD_NOTE_URL: string = this.BASE_URL + 'notes/add';
     private DELETE_BY_ID_URL: string = this.BASE_URL + 'notes/delete';
 
     private searchValue = new BehaviorSubject<string>("");
@@ -100,5 +101,9 @@ export class SharedService {
 
     deleteById(id: number): Observable<any> {
         return this.http.post(this.DELETE_BY_ID_URL, id);
+    }
+
+    addNote(heading: string, text: string): Observable<any> {
+        return this.http.post(this.ADD_NOTE_URL, {'heading': heading, 'text': text});
     }
 }
