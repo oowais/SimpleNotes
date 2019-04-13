@@ -25,6 +25,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedService } from './shared/shared.service';
 import { SearchComponent } from './search/search.component';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     NotesComponent,
     NotFoundComponent,
     SearchComponent,
-    NoteDialogComponent
+    NoteDialogComponent,
+    DeleteConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,8 @@ const appRoutes: Routes = [
   ],
   providers: [SharedService],
   bootstrap: [AppComponent],
-  entryComponents: [NoteDialogComponent]
+  entryComponents: [
+    NoteDialogComponent,
+    DeleteConfirmDialogComponent]
 })
 export class AppModule { }

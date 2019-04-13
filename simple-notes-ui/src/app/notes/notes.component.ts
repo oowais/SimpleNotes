@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../model/note';
 import { SharedService } from '../shared/shared.service';
+import { MatDialog } from '@angular/material';
+import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
   selector: 'app-notes',
@@ -12,6 +14,7 @@ export class NotesComponent implements OnInit {
 
   constructor(
     private service: SharedService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -50,19 +53,26 @@ export class NotesComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.service.deleteById(id).subscribe(
-      msg => {
-        if (true == msg.success){
-          this.service.alert('Note deleted!', false);
-          this.getAllNotes();
-        }
-        else
-          this.service.alert(msg, true);
-      },
-      err => {
-        console.log(err);
-      }
-    )
-  }
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '250px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if ('delete' == result) {
+        this.service.deleteById(id).subscribe(
+          msg => {
+            if (true == msg.success) {
+              this.service.alert('Note deleted!', false);
+              this.getAllNotes();
+            }
+            else
+              this.service.alert(msg, true);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
+    });
+  }
 }

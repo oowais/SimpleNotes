@@ -7,7 +7,7 @@
     width: 100%;
 }
 
-.input-text-area{
+.input-text-area {
     overflow-y: hidden;
 }
 
@@ -16,7 +16,7 @@
     max-height: 100vh;
 }
 
-.note-card-lt-sm{
+.note-card-lt-sm {
     width: 200px;
     max-height: 95vh;
 }

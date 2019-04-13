@@ -1,9 +1,13 @@
-/* TODO When the screen size is biggest show four cards in a row*/
+/* greater than xs and until md */
 .note-card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
     margin-bottom: 4em;
+}
+
+.note-card-container-gt-md{
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .delete-button{
