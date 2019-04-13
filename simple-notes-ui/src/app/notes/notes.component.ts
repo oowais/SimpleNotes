@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../model/note';
 import { SharedService } from '../shared/shared.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
+import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 
 @Component({
   selector: 'app-notes',
@@ -75,4 +76,13 @@ export class NotesComponent implements OnInit {
       }
     });
   }
+
+  edit(id: number, heading: string, text: string) {
+    console.log(id);
+
+    const dialogRef = this.dialog.open(NoteDialogComponent, {
+      data: {id: id, heading: heading, note_text: text}
+    });
+  }
+
 }

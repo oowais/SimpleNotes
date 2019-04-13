@@ -20,6 +20,12 @@
     display: inline-block;
 }
 
+.note-card:hover{
+    top: -2px;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+/* TODO show 1 card for phones */
 .note-card-container-xs {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;

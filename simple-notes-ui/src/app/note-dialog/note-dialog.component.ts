@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SharedService } from '../shared/shared.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Note } from '../model/note';
 
 @Component({
   selector: 'note-dialog',
@@ -12,13 +13,20 @@ export class NoteDialogComponent implements OnInit {
   heading: string;
   noteText: string;
   lastEdited: string;
+  // TODO Use note interface instead of all the fields listed above
+  note: Note;
   spinner: boolean = false;
 
   constructor(
     private service: SharedService,
-    private dialogRef: MatDialogRef<NoteDialogComponent>) { }
+    private dialogRef: MatDialogRef<NoteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Note) { }
 
   ngOnInit() {
+    console.log(this.id);
+    console.log(this.heading);
+    console.log(this.noteText);
+    console.log(this.lastEdited);
   }
 
   save(title: string, text: string) {
