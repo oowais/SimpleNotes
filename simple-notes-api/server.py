@@ -46,7 +46,7 @@ def delete_note():
     if result is True:
         return jsonify(success=True)
     else:
-        return jsonify("Note not found in database!", success=False)
+        return jsonify("Note not found!", success=False)
 
 
 @app.route('/feedback', methods=['POST'])

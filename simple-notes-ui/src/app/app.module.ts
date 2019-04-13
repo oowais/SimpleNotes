@@ -14,7 +14,8 @@ import {
   MatInputModule,
   MatSnackBarModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     MatSnackBarModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent],
