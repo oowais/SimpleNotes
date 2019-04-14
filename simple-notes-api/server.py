@@ -70,20 +70,5 @@ def feedback():
     # return jsonify("some error", success=False)
 
 
-class Employees(Resource):
-    def get(self):
-        return {'employees': [{'id': 1, 'name': 'Balram'}, {'id': 2, 'name': 'Tom'}]}
-
-
-class EmployeesName(Resource):
-    def get(self, employee_id):
-        print('Employee id:' + employee_id)
-        result = {'data': {'id': 1, 'name': 'Balram'}}
-        return jsonify(result)
-
-
-api.add_resource(Employees, '/employees')  # Route_1
-api.add_resource(EmployeesName, '/employees/<employee_id>')  # Route_3
-
 if __name__ == '__main__':
     app.run(port=5002, debug=True)
