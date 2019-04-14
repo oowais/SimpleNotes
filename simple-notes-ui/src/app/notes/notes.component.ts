@@ -77,11 +77,9 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  edit(id: number, heading: string, text: string) {
-    console.log(id);
-
+  edit(id: number, heading: string, text: string, last_edited: string) {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
-      data: {id: id, heading: heading, note_text: text}
+      data: {id: id, heading: heading, note_text: text, last_edited: last_edited}
     });
   }
 

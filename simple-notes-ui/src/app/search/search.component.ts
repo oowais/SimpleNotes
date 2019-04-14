@@ -28,7 +28,9 @@ export class SearchComponent implements OnInit {
   }
 
   newNote() {
-    const dialogRef = this.dialog.open(NoteDialogComponent);
+    const dialogRef = this.dialog.open(NoteDialogComponent, {
+      data: {heading: '', note_text: ''}
+    });
   }
 
   onSearchChange(searchValue: string) {

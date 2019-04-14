@@ -9,58 +9,69 @@ import { Note } from '../model/note';
   styleUrls: ['./note-dialog.component.css']
 })
 export class NoteDialogComponent implements OnInit {
-  id: number;
-  heading: string;
-  noteText: string;
-  lastEdited: string;
-  // TODO Use note interface instead of all the fields listed above
-  note: Note;
   spinner: boolean = false;
 
   constructor(
     private service: SharedService,
     private dialogRef: MatDialogRef<NoteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Note) { }
+    @Inject(MAT_DIALOG_DATA) public note: Note) { }
 
   ngOnInit() {
-    console.log(this.id);
-    console.log(this.heading);
-    console.log(this.noteText);
-    console.log(this.lastEdited);
   }
 
-  save(title: string, text: string) {
-    if (!this.validate(title, text)) {
+  save(id: number, heading: string, noteText: string) {
+    undefined == id ? this.newNote(heading, noteText) : this.editNote(id, heading, noteText);
+  }
+
+  editNote(id: number, heading: string, noteText: string): void {
+    if (!this.validate(heading, noteText)) {
       this.service.alert('Enter some text', true);
       return;
     }
     this.spinner = true;
-    this.service.addNote(title, text).subscribe(
+    this.service.editNote(id, heading, noteText).subscribe(
+      res => {
+        if (res.success == true) {
+          this.service.alert('Note updated', false);
+          // TODO: dont use location reload, instead refresh the notes component
+          this.spinner = false;
+          location.reload();
+        }
+      })
+  }
+
+  newNote(heading: string, noteText: string): void {
+    if (!this.validate(heading, noteText)) {
+      this.service.alert('Enter some text', true);
+      return;
+    }
+    this.spinner = true;
+    this.service.addNote(heading, noteText).subscribe(
       res => {
         if (res.success == true) {
           this.service.alert('Note saved', false);
           // TODO: dont use location reload, instead refresh the notes component
-          location.reload();
           this.spinner = false;
+          location.reload();
         }
       }
-    )
+    );
   }
 
   cancel(): void {
     this.dialogRef.close();
   }
 
-  validate(title: string, text: string): boolean {
+  validate(heading: string, noteText: string): boolean {
     let isValid: boolean = false;
-    if (undefined != text) {
-      if (text.trim().length > 0) {
+    if (undefined != noteText) {
+      if (noteText.trim().length > 0) {
         isValid = true;
       }
     }
 
-    if (undefined != title) {
-      if (title.trim().length > 0) {
+    if (undefined != heading) {
+      if (heading.trim().length > 0) {
         isValid = true;
       }
     }

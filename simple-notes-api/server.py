@@ -34,9 +34,18 @@ def add_note():
     return jsonify(success=True)
 
 
-@app.route('/notes/update', methods=['POST'])
-def update_note():
-    pass
+@app.route('/notes/edit', methods=['POST'])
+def edit_note():
+    data = request.data.decode("utf-8")
+    data_dict = json.loads(data)
+    now = datetime.datetime.now()
+    date = now.strftime("%d-%m-%Y %H:%M")
+    print(data_dict.get("id"))
+    print(data_dict.get("heading"))
+    print(data_dict.get("text"))
+    db.update_note(id=data_dict.get('id'), heading=data_dict.get('heading'), note_text=data_dict.get('text'),
+                   last_edited=date)
+    return jsonify(success=True)
 
 
 @app.route('/notes/delete', methods=['POST'])

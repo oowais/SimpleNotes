@@ -10,6 +10,16 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
+.note-card-container-xs {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1em;
+}
+
+.note-card-container-sm{
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em;
+}
+
 .delete-button{
     position: absolute;
     right: 0%;
@@ -21,12 +31,9 @@
 }
 
 .note-card:hover{
-    top: -2px;
-    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 5px rgba(0,0,0,0.5);
 }
 
-/* TODO show 1 card for phones */
-.note-card-container-xs {
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1em;
+.note-card-details{
+    cursor: pointer;
 }
