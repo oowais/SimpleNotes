@@ -15,7 +15,8 @@ import {
   MatSnackBarModule,
   MatCardModule,
   MatDialogModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatCardModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent],
