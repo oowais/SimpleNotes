@@ -1,3 +1,10 @@
+<div class="empty-notes-text" *ngIf="emptyNotes">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Click New Note button to add a note</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
 <div class="note-card-container" ngClass.xs="note-card-container-xs" ngClass.gt-md="note-card-container-gt-md"
   ngClass.sm="note-card-container-sm">
   <mat-card class="note-card" *ngFor="let n of notes">

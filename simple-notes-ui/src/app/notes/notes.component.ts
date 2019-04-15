@@ -12,6 +12,7 @@ import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 })
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
+  emptyNotes: boolean = false;
 
   constructor(
     private service: SharedService,
@@ -49,6 +50,10 @@ export class NotesComponent implements OnInit {
   public getAllNotes(): void {
     this.service.getAllNotes().subscribe(
       data => {
+        if (data.length > 0)
+          this.emptyNotes = false;
+        else
+          this.emptyNotes = true;
         this.notes = data;
       });
   }
@@ -79,7 +84,7 @@ export class NotesComponent implements OnInit {
 
   edit(id: number, heading: string, text: string, last_edited: string) {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
-      data: {id: id, heading: heading, note_text: text, last_edited: last_edited}
+      data: { id: id, heading: heading, note_text: text, last_edited: last_edited }
     });
   }
 

@@ -1,4 +1,5 @@
 /* greater than xs and until md */
+
 .note-card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -6,7 +7,7 @@
     margin-bottom: 4em;
 }
 
-.note-card-container-gt-md{
+.note-card-container-gt-md {
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -15,25 +16,29 @@
     grid-gap: 1em;
 }
 
-.note-card-container-sm{
+.note-card-container-sm {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;
 }
 
-.delete-button{
+.delete-button {
     position: absolute;
     right: 0%;
     display: none;
 }
 
-.note-card:hover .delete-button{
+.note-card:hover .delete-button {
     display: inline-block;
 }
 
-.note-card:hover{
-    box-shadow: 0 4px 5px rgba(0,0,0,0.5);
+.note-card:hover {
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.5);
 }
 
-.note-card-details{
+.note-card-details {
     cursor: pointer;
+}
+
+.empty-notes-text {
+    margin: 0 auto;
 }
