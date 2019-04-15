@@ -50,10 +50,7 @@ export class NotesComponent implements OnInit {
   public getAllNotes(): void {
     this.service.getAllNotes().subscribe(
       data => {
-        if (data.length > 0)
-          this.emptyNotes = false;
-        else
-          this.emptyNotes = true;
+        data.length > 0 ? this.emptyNotes = false : this.emptyNotes = true;
         this.notes = data;
       });
   }
