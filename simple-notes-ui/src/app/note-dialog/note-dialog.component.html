@@ -1,8 +1,8 @@
 <div class="note-card" ngClass.sm="note-card-sm" ngClass.lt-sm="note-card-lt-sm">
     <div mat-dialog-title>
         <mat-form-field class="input-title">
-            <textarea matInput placeholder="Title" [matTextareaAutosize]="true" value="{{note.heading}}"
-                [(ngModel)]="note.heading" maxlength="100" #title></textarea>
+            <textarea class="input-title-area" matInput placeholder="Title" cdkTextareaAutosize cdkAutosizeMaxRows="2"
+                value="{{note.heading}}" [(ngModel)]="note.heading" maxlength="100" #title></textarea>
             <mat-hint align="end">{{title.value.trim().length}}/100</mat-hint>
         </mat-form-field>
     </div>
@@ -19,7 +19,7 @@
         <button [disabled]="spinner" mat-raised-button color="primary"
             (click)="save(note.id, note.heading, note.note_text)">Save</button>
     </div>
-    <div *ngIf="note.last_edited">
+    <div *ngIf="note.last_edited" ngClass.lt-sm="last-edited-container-lt-sm">
         Last edited: {{note.last_edited}}
     </div>
 </div>

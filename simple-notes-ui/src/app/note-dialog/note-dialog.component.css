@@ -17,6 +17,10 @@
 }
 
 .note-card-lt-sm {
-    width: 200px;
+    width: 220px;
     max-height: 95vh;
+}
+
+.last-edited-container-lt-sm {
+    display: none;
 }
