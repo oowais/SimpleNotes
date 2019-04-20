@@ -20,9 +20,17 @@ export class NotesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.startReceivingEvents();
     this.service.changePage(location.pathname);
     this.getAllNotes();
     this.filterNotes();
+  }
+
+  startReceivingEvents() {
+    this.service.currentDeleteNote.subscribe(id => {
+      if (0 != id)
+        this.delete(id);
+    });
   }
 
   /**
@@ -82,6 +90,10 @@ export class NotesComponent implements OnInit {
   edit(id: number, heading: string, text: string, last_edited: string) {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
       data: { id: id, heading: heading, note_text: text, last_edited: last_edited }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAllNotes();
     });
   }
 

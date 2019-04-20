@@ -29,7 +29,12 @@ export class SearchComponent implements OnInit {
 
   newNote() {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
-      data: {heading: '', note_text: ''}
+      data: { heading: '', note_text: '' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // This is done in order to reload all notes
+      this.onSearchChange("");
     });
   }
 

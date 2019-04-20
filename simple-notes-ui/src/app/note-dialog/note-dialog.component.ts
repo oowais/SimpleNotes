@@ -33,9 +33,8 @@ export class NoteDialogComponent implements OnInit {
       res => {
         if (res.success == true) {
           this.service.alert('Note updated', false);
-          // TODO: dont use location reload, instead refresh the notes component
           this.spinner = false;
-          location.reload();
+          this.close();
         }
       })
   }
@@ -50,15 +49,14 @@ export class NoteDialogComponent implements OnInit {
       res => {
         if (res.success == true) {
           this.service.alert('Note saved', false);
-          // TODO: dont use location reload, instead refresh the notes component
           this.spinner = false;
-          location.reload();
+          this.close();
         }
       }
     );
   }
 
-  cancel(): void {
+  close(): void {
     this.dialogRef.close();
   }
 
@@ -76,5 +74,10 @@ export class NoteDialogComponent implements OnInit {
       }
     }
     return isValid;
+  }
+
+  deleteNote(id: number): void {
+    this.service.triggerDeleteNote(id);
+    this.close();
   }
 }

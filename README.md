@@ -10,3 +10,4 @@ A simple Python-Flask-Angular application for managing notes
 - [ ] Use a normal sql server within python for database instead of google sheets
 - [ ] Combine api and ui into an executable
 - [ ] Have a separate repo for executables
+- [ ] Ionic Framework

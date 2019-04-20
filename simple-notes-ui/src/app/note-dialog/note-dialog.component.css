@@ -17,10 +17,14 @@
 }
 
 .note-card-lt-sm {
-    width: 220px;
+    width: 230px;
     max-height: 95vh;
 }
 
 .last-edited-container-lt-sm {
     display: none;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }

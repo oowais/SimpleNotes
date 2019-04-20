@@ -23,14 +23,47 @@ export class SharedService {
 
     private searchValue = new BehaviorSubject<string>("");
     private page = new BehaviorSubject<string>("");
+    private deleteNote = new BehaviorSubject<number>(0);
 
     currentSearchValue = this.searchValue.asObservable();
     currentPage = this.page.asObservable();
+    currentDeleteNote = this.deleteNote.asObservable();
 
     constructor(
         private http: HttpClient,
         private snackBar: MatSnackBar
     ) { }
+
+    /**
+   * @ngdoc function
+   * @name changePage
+   * @description Send event that page has changed
+   * @param pageName
+   */
+    changePage(pageName: string) {
+        this.page.next(pageName);
+    }
+
+    /**
+    * @ngdoc function
+    * @name changeSearchValue
+    * @description Send event that search value has changed
+    * @param search
+    */
+    changeSearchValue(search: string) {
+        this.searchValue.next(search);
+    }
+
+    /**
+    * @ngdoc function
+    * @name triggerDeleteNote
+    * @description Send event that delete must be executed
+    * @param search
+    */
+    triggerDeleteNote(id: number) {
+        this.deleteNote.next(id);
+    }
+
 
     /**
    * @ngdoc function
@@ -78,26 +111,6 @@ export class SharedService {
         config.duration = 2000;
         config.panelClass = error ? ['error-toast'] : undefined;
         this.snackBar.open(text, 'Close', config);
-    }
-
-    /**
-   * @ngdoc function
-   * @name changePage
-   * @description Send event that page has changed
-   * @param pageName
-   */
-    changePage(pageName: string) {
-        this.page.next(pageName);
-    }
-
-    /**
-   * @ngdoc function
-   * @name changeSearchValue
-   * @description Send event that search value has changed
-   * @param search
-   */
-    changeSearchValue(search: string) {
-        this.searchValue.next(search);
     }
 
     deleteById(id: number): Observable<any> {
