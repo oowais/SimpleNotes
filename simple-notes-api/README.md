@@ -43,3 +43,8 @@ Follow the procedure to add your own DB file in the root of simple-notes-api
   ![Like this](assets/DB-Sheets-heading.png)
 - Click on `Share` button on top-right, and paste that `client_email` from the json file
 - Now you should be able to use server.py to access data from Google sheets
+
+## Executable
+- Run `pyinstaller --onefile server.py` in simple-notes-api folder
+- The executable will be created in `dist` folder
+- Copy the executable to simple-notes-api folder and double click to execute it
