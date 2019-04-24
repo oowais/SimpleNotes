@@ -7,11 +7,17 @@ class SqliteDb:
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         self.__conn = sqlite3.connect('db/notes.db')
+        self.__table_name = 'notes'
+        self.create_table()
 
     def create_table(self):
         c = self.__conn.cursor()
-        c.execute()
-        pass
+        create_table = '''CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY,
+                        heading text, note_text text, last_edited text)'''
+        params = (self.__table_name,)
+        c.execute(create_table)
+        self.__conn.commit()
+        c.close()
 
     def get_all_notes(self):
         try:
