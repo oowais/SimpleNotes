@@ -3,7 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import logging
 
 
-class Db:
+class SheetsDb:
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
@@ -11,7 +11,7 @@ class Db:
         self.__scope = ['https://spreadsheets.google.com/feeds',
                         'https://www.googleapis.com/auth/drive']
         self.__cred = ServiceAccountCredentials.from_json_keyfile_name(
-            'Simple-Notes-DB.json', self.__scope)
+            'db/Simple-Notes-DB.json', self.__scope)
 
         self.__client = gspread.authorize(self.__cred)
         self.__sheet = self.__client.open('Simple Notes DB').sheet1
@@ -97,6 +97,3 @@ class Db:
         if records is None:
             return 0
         return len(records) + 1
-
-    def test(self):
-        print(self.__get_note_row(8))

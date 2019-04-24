@@ -4,15 +4,22 @@ import datetime
 from flask import Flask, request
 from flask_cors import CORS
 from flask_jsonpify import jsonify
-from flask_restful import Api, Resource
+from flask_restful import Api
+from pathlib import Path
 
-from db import Db
+from google_sheets_db import SheetsDb
+from sqlite_db import SqliteDb
 
 app = Flask(__name__)
 api = Api(app)
 
 CORS(app)
-db = Db()
+
+json_file = Path('db/Simple-Notes-DB.json')
+if json_file.is_file():
+    db = SheetsDb()
+else:
+    db = SqliteDb()
 
 
 @app.route("/notes", methods=['GET'])
