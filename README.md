@@ -7,7 +7,7 @@ A simple Python-Flask-Angular application for managing notes
 - [x] Run electron with python
 - [x] Executable of api (pyinstaller)
 - [x] Executable for ui ([Electron packager](https://www.christianengvall.se/electron-packager-tutorial/))
-- [ ] Use sqlite as db alternative instead of google sheets :point_left:
-- [ ] Electron angular + python exe= native app
-- [ ] Have a separate repo for executables
+- [x] Use sqlite as db alternative instead of google sheets
+- [ ] Electron angular + python exe= native app :point_left:
+- [ ] Have a separate repo for executables or modify releases
 - [ ] Ionic Framework
