@@ -47,9 +47,6 @@ def edit_note():
     data_dict = json.loads(data)
     now = datetime.datetime.now()
     date = now.strftime("%d-%m-%Y %H:%M")
-    print(data_dict.get("id"))
-    print(data_dict.get("heading"))
-    print(data_dict.get("text"))
     db.update_note(id=data_dict.get('id'), heading=data_dict.get('heading'), note_text=data_dict.get('text'),
                    last_edited=date)
     return jsonify(success=True)
@@ -62,7 +59,7 @@ def delete_note():
     if result is True:
         return jsonify(success=True)
     else:
-        return jsonify("Note not found!", success=False)
+        return jsonify("Error in deleting!", success=False)
 
 
 @app.route('/feedback', methods=['POST'])

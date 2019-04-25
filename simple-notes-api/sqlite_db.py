@@ -25,8 +25,9 @@ class SqliteDb:
             c = self.__conn.cursor()
             get_notes = '''SELECT * FROM notes'''
             c.execute(get_notes)
+            self.__conn.commit()
             records = c.fetchall()
-
+            c.close()
             notes = []
             for d in records:
                 notes.append({'id': d[0], 'heading': d[1], 'note_text': d[2], 'last_edited': d[3]})
@@ -41,7 +42,9 @@ class SqliteDb:
             filter_notes = '''SELECT * FROM notes WHERE heading LIKE ? OR note_text LIKE ?'''
             params = ('%' + search_value + '%', '%' + search_value + '%')
             c.execute(filter_notes, params)
+            self.__conn.commit()
             records = c.fetchall()
+            c.close()
             notes = []
             for d in records:
                 notes.append({'id': d[0], 'heading': d[1], 'note_text': d[2], 'last_edited': d[3]})
@@ -64,9 +67,30 @@ class SqliteDb:
             return None
 
     def update_note(self, id, heading, note_text, last_edited):
-        # get the row with id and update other details
-        pass
+        try:
+            c = self.__conn.cursor()
+            update = '''UPDATE notes SET heading= ?, note_text=?, last_edited=? WHERE id=?'''
+            params = (heading, note_text, last_edited, id,)
+            c.execute(update, params)
+            c.fetchall()
+            self.__conn.commit()
+            c.close()
+            self.logger.info('Node %d updated', id)
+        except sqlite3.Error as e:
+            self.logger.error("Database error: %s" % e)
+            return None
 
     def delete_note(self, id):
-        # delete row with id matching
-        pass
+        try:
+            c = self.__conn.cursor()
+            delete = '''DELETE FROM notes WHERE id=?'''
+            params = (id,)
+            c.execute(delete, params)
+            print(c.fetchall())
+            self.__conn.commit()
+            c.close()
+            self.logger.info('Node %d deleted', id)
+            return True
+        except sqlite3.Error as e:
+            self.logger.error("Database error: %s" % e)
+            return None
