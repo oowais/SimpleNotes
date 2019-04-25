@@ -42,3 +42,12 @@
 .empty-notes-text {
     margin: 0 auto;
 }
+
+.wrap {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
