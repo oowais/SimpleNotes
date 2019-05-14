@@ -93,4 +93,4 @@ if __name__ == "__main__":
     Check if simple notes db is present(meaning Google sheets db is setup)
     If not use sqlite
     """
-    app.run(port=5002, debug=True)
+    app.run(port=5002, debug=False)

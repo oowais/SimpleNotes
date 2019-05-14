@@ -4,17 +4,19 @@ import logging
 
 
 class SheetsDb:
-
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
-        self.__scope = ['https://spreadsheets.google.com/feeds',
-                        'https://www.googleapis.com/auth/drive']
+        self.__scope = [
+            "https://spreadsheets.google.com/feeds",
+            "https://www.googleapis.com/auth/drive",
+        ]
         self.__cred = ServiceAccountCredentials.from_json_keyfile_name(
-            'db/Simple-Notes-DB.json', self.__scope)
+            "db/Simple-Notes-DB.json", self.__scope
+        )
 
         self.__client = gspread.authorize(self.__cred)
-        self.__sheet = self.__client.open('Simple Notes DB').sheet1
+        self.__sheet = self.__client.open("Simple Notes DB").sheet1
 
     def get_all_notes(self):
         try:
@@ -23,8 +25,14 @@ class SheetsDb:
             return None
         notes = []
         for d in records:
-            notes.append({'id': d.get('id'), 'heading': d.get('heading'), 'note_text': d.get('note_text'),
-                          'last_edited': d.get('last_edited')})
+            notes.append(
+                {
+                    "id": d.get("id"),
+                    "heading": d.get("heading"),
+                    "note_text": d.get("note_text"),
+                    "last_edited": d.get("last_edited"),
+                }
+            )
         return notes
 
     def get_filtered_notes(self, search_value):
@@ -34,9 +42,18 @@ class SheetsDb:
             return None
         notes = []
         for d in records:
-            if search_value.lower() in d.get('heading').lower() or search_value.lower() in d.get('note_text').lower():
-                notes.append({'id': d.get('id'), 'heading': d.get('heading'), 'note_text': d.get('note_text'),
-                              'last_edited': d.get('last_edited')})
+            if (
+                search_value.lower() in d.get("heading").lower()
+                or search_value.lower() in d.get("note_text").lower()
+            ):
+                notes.append(
+                    {
+                        "id": d.get("id"),
+                        "heading": d.get("heading"),
+                        "note_text": d.get("note_text"),
+                        "last_edited": d.get("last_edited"),
+                    }
+                )
         return notes
 
     def create_note(self, heading, note_text, last_edited):
@@ -53,28 +70,28 @@ class SheetsDb:
 
             index = total_rows + 1
             curr_id = last_id + 1
-        self.logger.info('Create note with id %d', curr_id)
+        self.logger.info("Create note with id %d", curr_id)
         self.__sheet.insert_row([curr_id, heading, note_text, last_edited], index)
 
     def update_note(self, id, heading, note_text, last_edited):
         note_row = self.__get_note_row(id)
         if note_row is not None:
-            self.logger.info('Update note %d', id)
+            self.logger.info("Update note %d", id)
             self.__sheet.update_cell(note_row, 2, heading)
             self.__sheet.update_cell(note_row, 3, note_text)
             self.__sheet.update_cell(note_row, 4, last_edited)
         else:
-            self.logger.warning('Note %d not found!', id)
+            self.logger.warning("Note %d not found!", id)
             self.create_note(heading, note_text, last_edited)
 
     def delete_note(self, id):
         note_row = self.__get_note_row(id)
         if note_row is None:
-            self.logger.warning('Note %d not found! Cannot delete', id)
+            self.logger.warning("Note %d not found! Cannot delete", id)
             return False
         else:
             self.__sheet.delete_row(note_row)
-            self.logger.warning('Note %d deleted', id)
+            self.logger.warning("Note %d deleted", id)
             return True
 
     def __get_note_row(self, id):
@@ -84,7 +101,7 @@ class SheetsDb:
         # row is 2 since row 1 contains title
         row = 2
         for d in records:
-            if id == d.get('id'):
+            if id == d.get("id"):
                 return row
             row += 1
         return None
