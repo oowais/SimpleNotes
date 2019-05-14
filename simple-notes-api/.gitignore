@@ -5,3 +5,4 @@ db/Simple-Notes-DB.json
 db/Simple-Notes-DB_.json
 /data_structure/__pycache__
 server.exe
+/env
