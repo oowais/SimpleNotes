@@ -34,7 +34,7 @@ Follow the procedure to add your own DB file in the root of simple-notes-api
 - Go back to [Developers Google ](https://console.developers.google.com/) and enable `Google Sheets Api` for the same project
 - Now open `Simple-Notes-DB.json`
 - Copy the property value of `client_email`
-- Now create a new sheet in google drive
+- Now create a new sheet named `Simple Notes DB` in google drive 
 - To make sure the database works properly, edit the following cells
   - Cell A1: `id`
   - Cell B1: `heading`
