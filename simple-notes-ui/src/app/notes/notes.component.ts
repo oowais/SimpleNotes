@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../model/note';
 import { SharedService } from '../shared/shared.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 
